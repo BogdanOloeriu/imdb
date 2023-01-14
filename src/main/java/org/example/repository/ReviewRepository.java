@@ -5,7 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class ReviewRepository {
+import java.util.List;
+
+public class ReviewRepository implements CRUDRepository<Review>{
 
     private final SessionFactory sessionFactory;
 
@@ -13,7 +15,7 @@ public class ReviewRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public Review saveReview(Review review){
+    public Review create(Review review){
         try{
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -27,5 +29,15 @@ public class ReviewRepository {
         }catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Review> findAll() {
+        Session session = sessionFactory.openSession();
+
+        List<Review> reviews = session.createQuery("from Review", Review.class).getResultList();
+
+        session.close();
+        return reviews;
     }
 }

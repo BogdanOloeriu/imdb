@@ -5,7 +5,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class AppUserRepository {
+import java.util.List;
+
+public class AppUserRepository implements CRUDRepository<AppUser> {
 
     private final SessionFactory sessionFactory;
 
@@ -14,7 +16,7 @@ public class AppUserRepository {
     }
 
 
-    public AppUser saveAppUser(AppUser appUser){
+    public AppUser create(AppUser appUser){
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -28,5 +30,15 @@ public class AppUserRepository {
         }catch (Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<AppUser> findAll() {
+        Session session = sessionFactory.openSession();
+
+        List<AppUser> appUsers = session.createQuery("from AppUser ", AppUser.class).getResultList();
+
+        session.close();
+        return appUsers;
     }
 }

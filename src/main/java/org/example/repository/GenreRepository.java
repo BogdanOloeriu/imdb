@@ -6,10 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GenreRepository {
+public class GenreRepository implements CRUDRepository<Genre> {
 
     private final SessionFactory sessionFactory;
 
@@ -17,7 +18,7 @@ public class GenreRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public Genre saveGenre(Genre genre){
+    public Genre create(Genre genre){
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
@@ -31,11 +32,11 @@ public class GenreRepository {
         }
     }
 
-    public Set<Genre> findAll(){
+    public List<Genre> findAll(){
 
         Session session = sessionFactory.openSession();
 
-        Set<Genre> genres = session.createQuery("select t from Genre t ", Genre.class).getResultStream().collect(Collectors.toSet());
+        List<Genre> genres = session.createQuery("select t from Genre t ", Genre.class).getResultList();
 
         session.close();
 

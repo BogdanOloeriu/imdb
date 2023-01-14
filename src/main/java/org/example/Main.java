@@ -43,30 +43,31 @@ public class Main {
 //            addToTheTables(sessionFactory);
 
             GenreRepository genreRepository = new GenreRepository(sessionFactory);
-            genreRepository.saveGenre(fantasy);
+            genreRepository.create(fantasy);
 
             MovieRepository movieRepository = new MovieRepository(sessionFactory);
-            movieRepository.saveMovie(avatar);
+            movieRepository.create(avatar);
 
 
             GenreService genreService = new GenreServiceKeyboardImpl();
             MovieService movieService = new MovieServiceKeyboardImpl(genreRepository);
 
             Genre g = genreService.read();
-            genreRepository.saveGenre(g);
+            genreRepository.create(g);
 
             Movie m = movieService.read();
-            movieRepository.saveMovie(m);
+            movieRepository.create(m);
 
 
             AppUserRepository appUserRepository = new AppUserRepository(sessionFactory);
-            AppUser user1 = appUserRepository.saveAppUser(new AppUser("user1@gmail.com","password1"));
-            AppUser user2 = appUserRepository.saveAppUser(new AppUser("user2@gmaol.com","password2"));
-            AppUser user3 = appUserRepository.saveAppUser(new AppUser("user3@gmail.com","password3"));
+            AppUser user1 = appUserRepository.create(new AppUser("user1@gmail.com","password1"));
+            AppUser user2 = appUserRepository.create(new AppUser("user2@gmaol.com","password2"));
+            AppUser user3 = appUserRepository.create(new AppUser("user3@gmail.com","password3"));
 
             ReviewRepository reviewRepository = new ReviewRepository(sessionFactory);
-            Review review1 = reviewRepository.saveReview(new Review(user1,9, Date.valueOf("2023-01-12"),
+            Review review1 = reviewRepository.create(new Review(user1,9, Date.valueOf("2023-01-12"),
                     "Good movie",m));
+            //review1.getMovie().setName("Random"); - nu ar trebui sa mearga asa
 
 
             System.out.println(movieRepository.findAll());

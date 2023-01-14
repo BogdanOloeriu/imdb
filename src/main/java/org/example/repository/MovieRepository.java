@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class MovieRepository {
+public class MovieRepository implements CRUDRepository<Movie>{
 
     private final SessionFactory sessionFactory;
 
@@ -17,7 +17,7 @@ public class MovieRepository {
     }
 
 
-    public Movie saveMovie(Movie movie){
+    public Movie create(Movie movie){
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();

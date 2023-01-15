@@ -25,6 +25,21 @@ public class Movie extends BaseEntity{
             inverseJoinColumns = @JoinColumn(name = "tag_name"))
     Set<Tag> tags = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "casting",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id")
+    )
+    private Set<Actor> actors = new HashSet<>();
+
+    public Set<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
+    }
+
     public Movie() {
     }
 

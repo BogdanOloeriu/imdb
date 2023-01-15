@@ -18,6 +18,8 @@ public class HibernateConfig {
                     .addAnnotatedClass(AppUser.class)
                     .addAnnotatedClass(Review.class)
                     .addAnnotatedClass(Tag.class)
+                   .addAnnotatedClass(Casting.class)
+                   .addAnnotatedClass(Actor.class)
                     .buildSessionFactory();
             System.out.println("Session factory created!");
         }

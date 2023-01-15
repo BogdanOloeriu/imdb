@@ -1,9 +1,7 @@
 package org.example;
 
-import org.example.service.GenericsService;
-import org.example.service.GenreService;
-import org.example.service.MovieService;
-import org.example.service.ReviewService;
+import org.example.repository.ActorRepository;
+import org.example.service.*;
 import org.example.service.impl.GenreServiceConsoleImpl;
 import org.example.service.impl.MovieServiceConsoleImpl;
 
@@ -13,7 +11,7 @@ public class Menu {
 
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void enterGeneralMenu(GenreService genreService, MovieService movieService, ReviewService reviewService) {
+    public static void enterGeneralMenu(GenreService genreService, MovieService movieService, ReviewService reviewService, ActorService actorService) {
         Boolean exitCommand = false;
         String userWrite = null;
         while (!exitCommand) {
@@ -23,6 +21,7 @@ public class Menu {
             System.out.println(" 1 -> Genre ");
             System.out.println(" 2 -> Movie ");
             System.out.println(" 3 -> Review ");
+            System.out.println(" 4 -> Actors");
             userWrite = scanner.nextLine();
             switch (userWrite) {
                 case ("1"):
@@ -39,6 +38,10 @@ public class Menu {
                     System.out.println("=======REVIEWS=======");
                     displaySpecificMenu(reviewService);
 //                    exitCommand = true;
+                    break;
+                case ("4"):
+                    System.out.println("======Actors=========");
+                    displaySpecificMenu(actorService);
                     break;
                 case ("exit"):
                     exitCommand = true;

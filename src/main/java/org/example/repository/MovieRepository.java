@@ -88,4 +88,12 @@ public class MovieRepository implements CRUDRepository<Movie> {
             throw new RuntimeException(e);
         }
     }
+
+    public Movie getMovieWithActors(Integer movieId) {
+        Session session = sessionFactory.openSession();
+        Movie m = session.createQuery("select m from Movie m join fetch m.actors where m.id = :movieId", Movie.class)
+                .setParameter("movieId", movieId).getSingleResult();
+        session.close();
+        return m;
+    }
 }

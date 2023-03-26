@@ -21,7 +21,8 @@ public class Movie extends BaseEntity{
     //cascadeType.MERGE -> cand o entitate movie va fi MERGED va cascada(propaga) actiunea MERGE si catre toate entitatie Tag din Set(va incerca sa le faca update sau create)
     //FetchType.EAGER -> cand incarca o entitate Movie din baza de date, va aduc si oiectele de tipul Tag asociate ei
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.EAGER)
-            @JoinTable(name = "movie_tag",joinColumns = @JoinColumn(name = "movie_id"),
+            @JoinTable(name = "movie_tag",
+                    joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_name"))
     Set<Tag> tags = new HashSet<>();
 

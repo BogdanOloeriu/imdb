@@ -62,14 +62,14 @@ public class Main {
 //                    "Good movie",m));
             //review1.getMovie().setName("Random"); - nu ar trebui sa mearga asa
 
-            //Menu.enterGeneralMenu(genreService, movieService,reviewService,actorService);
+            Menu.enterGeneralMenu(genreService, movieService,reviewService,actorService);
 
             //verifyMovieTag(sessionFactory);
 
 //            Genre documentary = new Genre("documentary", "documentary Movie");
 //            documentary = genreRepository.create(documentary);
 
-            initializeDateBase(HibernateConfig.getHibernateSessionFactory());
+            //initializeDateBase(HibernateConfig.getHibernateSessionFactory());
 
 
         } catch (Exception e) {
